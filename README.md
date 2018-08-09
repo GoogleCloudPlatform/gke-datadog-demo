@@ -121,6 +121,5 @@ You can find additional information at the following locations
 * [DatadogHQ](https://www.datadoghq.com)
 * [Terraform Documentation](https://www.terraform.io/docs/providers/google/index.html)
 
-
 **This is not an officially supported Google product**
 
