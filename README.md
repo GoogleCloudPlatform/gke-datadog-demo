@@ -22,7 +22,7 @@ A common goal of cloud computing is to abstract away operational tasks from appl
 developer efforts can be focused on providing business value. One feature common to most applications is the need to
 monitor application and hardware metrics. On
 [Google Cloud Platform (GCP)](https://cloud.google.com/) the [Stackdriver](https://cloud.google.com/stackdriver/) suite
-of products addresses the need for monitoring and alerting. Some companies may already have a third party solution, however, and this project demonstrates configuring the use of [Datadog](https://www.datadoghq.com/) in a [GKE](https://cloud.google.com/kubernetes-engine/) environment. We show you how to collect [nginx](https://www.nginx.com/) metrics and pipe them to your existing Datadog account.
+of products addresses the need for monitoring and alerting. Some companies may already have a third party solution, however, and this project demonstrates configuring the use of [Datadog](https://www.datadoghq.com/) in a [Kubernetes Engine](https://cloud.google.com/kubernetes-engine/) environment. We show you how to collect [nginx](https://www.nginx.com/) metrics and pipe them to your existing Datadog account.
 
 This demo contains a simple deployment script for Kubernetes Engine using personal accounts and Terraform. There is one manifest
 that deploys the Datadog agents and nginx.
@@ -76,8 +76,8 @@ gcloud cli to your personal account.
 1. Login to the DatadogHQ site and go to [Agent Installation](https://app.datadoghq.com/account/settings#agent/kubernetes) to display the text for the Datadog agent Kubernetes manifest. Scroll down until you see `DD_API_KEY`. Copy the value and paste it into `manifests/datadog-agent.yaml` at the same key.
 1. In DatadogHQ site go to "Integrations" -> Type "nginx" in the search bar -> Click on the "NGINX" Tile -> "Configuration" Tab -> "Install Integration" -- NGINX dashboards will now be available in the "Dashboards List"
 
-### Set up GKE Cluster Using Terraform
-1. Run: `gcloud services enable container.googleapis.com` - This allows for programmatic access to GKE, which will be used by scripts run at the commandline.
+### Set up Kubernetes Engine Cluster Using Terraform
+1. Run: `gcloud services enable container.googleapis.com` - This allows for programmatic access to Kubernetes Engine, which will be used by scripts run at the commandline.
 1. Run: `./scripts/generate-tfvars.sh` - This uses values from your gcloud configuration and saves them to a configuration file that Terraform uses to deploy the demo to the configured project and zone.
 1. Run: `cd terraform` - This puts you in the directory with Terraform's configuration files.
 1. Run: `terraform init` - This prepares Terraform for action by downloading dependencies used to access GCP.
@@ -91,7 +91,7 @@ gcloud cli to your personal account.
 1. Run: `cd ..` - This puts you back at your project root.
 1. Run: `kubectl create configmap nginx-config --from-file=manifests/configs/default.conf` - This loads the nginx configuration into Kubernetes as a [ConfigMap](https://cloud.google.com/kubernetes-engine/docs/concepts/configmap).
 1. Run: `kubectl create configmap datadog-config --from-file=manifests/configs/conf.yaml` - This loads the Datadog configuration into Kubernetes as a ConfigMap.
-1. Run: `kubectl apply -f manifests/` - This deploys the Datadog agent and nginx to your GKE cluster. It may take a minute or two and will complete in the background.
+1. Run: `kubectl apply -f manifests/` - This deploys the Datadog agent and nginx to your Kubernetes Engine cluster. It may take a minute or two and will complete in the background.
 
 
 ## Validation

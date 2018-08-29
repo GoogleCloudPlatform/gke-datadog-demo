@@ -40,9 +40,6 @@ gcloud services enable container.googleapis.com logging.googleapis.com \
 (cd "$ROOT/terraform"; terraform apply -input=false -auto-approve)
 
 # Deploy the Kubernetes resources to the created cluster
-kubectl create configmap nginx-config --from-file="$ROOT/manifests/configs/default.conf"
-kubectl create configmap datadog-config --from-file="$ROOT/manifests/configs/conf.yaml"
-kubectl apply -f "$ROOT/manifests/"
-
-# kubectl apply -n default -f "$ROOT/manifests/datadog-agent.yaml"
-# kubectl apply -n default -f "$ROOT/manifests/service.yaml"
+kubectl create configmap nginx-config -n default --from-file="$ROOT/manifests/configs/default.conf"
+kubectl create configmap datadog-config -n default --from-file="$ROOT/manifests/configs/conf.yaml"
+kubectl apply -n default -f "$ROOT/manifests/"
