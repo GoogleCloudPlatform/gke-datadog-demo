@@ -1,5 +1,7 @@
 terraform.tfvars
 .terraform
 .terraform.tfstate.lock.info
-terraform.tfstate
 
+# .tfstate files
+*.tfstate
+*.tfstate.*

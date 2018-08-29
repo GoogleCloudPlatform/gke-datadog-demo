@@ -25,18 +25,15 @@ resource "google_container_cluster" "primary" {
   initial_node_count = 2
 
   provisioner "local-exec" {
-    command = "gcloud container clusters get-credentials ${google_container_cluster.primary.name}"
+    command = "gcloud container clusters get-credentials ${google_container_cluster.primary.name} --zone ${google_container_cluster.primary.zone} --project ${var.project}"
   }
 
-  provisioner "local-exec" {
-    command  = "kubectl create configmap nginx-config --from-file=manifests/configs/default.conf"
-  }
+}
 
-  provisioner "local-exec" {
-    command  = "kubectl create configmap datadog-config --from-file=manifests/configs/conf.yaml"
-  }
+output "cluster_name" {
+  value = "${google_container_cluster.primary.name}"
+}
 
-  provisioner "local-exec" {
-    command = "kubectl apply -f manifests/"
-  }
+output "primary_zone" {
+  value = "${google_container_cluster.primary.zone}"
 }
