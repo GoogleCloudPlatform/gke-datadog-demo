@@ -54,3 +54,27 @@ do
 done
 #Remove the last comma from the starting
 ZONESINREGION=${ZONESINREGION%?}
+
+# "---------------------------------------------------------"
+# "-                                                       -"
+# "-  Common functions for all scripts                     -"
+# "-                                                       -"
+# "---------------------------------------------------------"
+
+# Waiting for website to comes up
+function wait_for_server () {
+attempt_counter=0
+max_attempts=5
+site=$1
+until curl --output /dev/null --silent --head --fail "$site"; do
+    if [ ${attempt_counter} -eq ${max_attempts} ];then
+      echo "Max attempts reached"
+      exit 1
+    fi
+
+    printf '.'
+    attempt_counter=$((attempt_counter+1))
+    sleep 5
+done
+}
+
