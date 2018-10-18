@@ -14,6 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+// Provides access to available Google Container Engine versions in a zone for a given project.
+// https://www.terraform.io/docs/providers/google/d/google_container_engine_versions.html
+data "google_container_engine_versions" "on-prem" {
+  zone    = "${var.zone}"
+  project = "${var.project}"
+}
 
 // https://www.terraform.io/docs/providers/google/d/google_container_cluster.html
 // Create the primary cluster for this project.
@@ -23,6 +29,7 @@ resource "google_container_cluster" "primary" {
   name               = "${var.clusterName}"
   zone               = "${var.zone}"
   initial_node_count = 2
+  min_master_version = "${data.google_container_engine_versions.on-prem.latest_master_version}"
 
   provisioner "local-exec" {
     command = "gcloud container clusters get-credentials ${google_container_cluster.primary.name} --zone ${google_container_cluster.primary.zone} --project ${var.project}"
