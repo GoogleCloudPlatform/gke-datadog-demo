@@ -33,7 +33,7 @@ APP_NAME="nginx"
 
 # Loop for up to 60 seconds waiting for service's IP address
 EXT_IP=""
-for _ in {1..30}; do
+for _ in {1..60}; do
   EXT_IP=$(kubectl get svc "$APP_NAME" -n default \
     -ojsonpath='{.status.loadBalancer.ingress[0].ip}')
   [ ! -z "$EXT_IP" ] && break
@@ -54,6 +54,8 @@ EXT_PORT=$(kubectl get service "$APP_NAME" -n default \
 echo "App is available at: http://$EXT_IP:$EXT_PORT"
 
 # Test service availability
-wait_for_server "http://$EXT_IP:$EXT_PORT"
+wait_for_service_okay "http://$EXT_IP:$EXT_PORT"
 
+# succeeded, let's report it
+echo "service / returns an HTTP 200 response code"
 echo "Step 2 of the validation passed. App handles requests."
