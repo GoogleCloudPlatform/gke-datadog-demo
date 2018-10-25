@@ -81,7 +81,7 @@ done
 function wait_for_service_okay() {
   # Define retry constants
   local -r MAX_COUNT=60
-  local -r RETRY_COUNT=0
+  local RETRY_COUNT=0
   local -r SLEEP=2
   local -r url=$1
   # Curl for the service with retries
