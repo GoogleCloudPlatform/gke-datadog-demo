@@ -78,3 +78,36 @@ until curl --output /dev/null --silent --head --fail "$site"; do
 done
 }
 
+function wait_for_service_okay() {
+  # Define retry constants
+  local -r MAX_COUNT=60
+  local -r RETRY_COUNT=0
+  local -r SLEEP=2
+  local -r url=$1
+  # Curl for the service with retries
+  STATUS_CODE=$(curl -s -o /dev/null -w '%{http_code}' "$url")
+  until [[ $STATUS_CODE -eq 200 ]]; do
+      if [[ "${RETRY_COUNT}" -gt "${MAX_COUNT}" ]]; then
+      # failed with retry, lets check whatz wrong and bail
+      echo "Retry count exceeded. Exiting..."
+      # Timed out?
+      if [ -z "$STATUS_CODE" ]
+      then
+        echo "ERROR - Timed out waiting for service"
+        exit 1
+      fi
+      # HTTP status not okay?
+      if [ "$STATUS_CODE" != "200" ]
+      then
+        echo "ERROR - Service is returning error"
+        exit 1
+      fi
+      fi
+      NUM_SECONDS="$(( RETRY_COUNT * SLEEP ))"
+      echo "Waiting for service availability..."
+      echo "service / did not return an HTTP 200 response code after ${NUM_SECONDS} seconds"
+      sleep "${SLEEP}"
+      RETRY_COUNT="$(( RETRY_COUNT + 1 ))"
+      STATUS_CODE=$(curl -s -o /dev/null -w '%{http_code}' "$EXT_IP:$EXT_PORT/")
+  done
+}
