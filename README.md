@@ -5,11 +5,13 @@
 * [Introduction](#introduction)
 * [Architecture](#architecture)
 * [Prerequisites](#prerequisites)
-  * [Tools](#tools)
-    * [Install Cloud SDK](#install-cloud-sdk)
-    * [Install kubectl CLI](#install-kubectl-cli)
-    * [Install Terraform](#install-terraform)
-    * [Configure Authentication](#configure-authentication)
+	* [Run Demo in a Google Cloud Shell](#run-demo-in-a-google-cloud-shell)
+	* [Run Demo in a SSH Terminal](#run-demo-in-a-ssh-terminal)
+	  * [Tools](#tools)
+	    * [Install Cloud SDK](#install-cloud-sdk)
+	    * [Install kubectl CLI](#install-kubectl-cli)
+	    * [Install Terraform](#install-terraform)
+	    * [Configure Authentication](#configure-authentication)
 * [Deployment](#deployment)
 * [Validation](#validation)
 * [Tear Down](#tear-down)
@@ -138,3 +140,4 @@ You can find additional information at the following locations
 * [Terraform Documentation](https://www.terraform.io/docs/providers/google/index.html)
 
 **This is not an officially supported Google product**
+
