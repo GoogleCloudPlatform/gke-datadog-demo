@@ -5,11 +5,13 @@
 * [Introduction](#introduction)
 * [Architecture](#architecture)
 * [Prerequisites](#prerequisites)
-  * [Tools](#tools)
-    * [Install Cloud SDK](#install-cloud-sdk)
-    * [Install kubectl CLI](#install-kubectl-cli)
-    * [Install Terraform](#install-terraform)
-    * [Configure Authentication](#configure-authentication)
+	* [Run Demo in a Google Cloud Shell](#run-demo-in-a-google-cloud-shell)
+	* [Run Demo in a SSH Terminal](#run-demo-in-a-ssh-terminal)
+	  * [Tools](#tools)
+	    * [Install Cloud SDK](#install-cloud-sdk)
+	    * [Install kubectl CLI](#install-kubectl-cli)
+	    * [Install Terraform](#install-terraform)
+	    * [Configure Authentication](#configure-authentication)
 * [Deployment](#deployment)
 * [Validation](#validation)
 * [Tear Down](#tear-down)
@@ -50,6 +52,7 @@ and zone.
 ```console
 gcloud init
 ```
+### Run Demo in a SSH Terminal
 
 ### Tools
 1. [Terraform >= 0.11.7](https://www.terraform.io/downloads.html)
@@ -92,23 +95,10 @@ gcloud cli to your personal account.
 1. Login to the DatadogHQ site and go to [Agent Installation](https://app.datadoghq.com/account/settings#agent/kubernetes) to display the text for the Datadog agent Kubernetes manifest. Scroll down until you see `DD_API_KEY`. Copy the value and paste it into `manifests/datadog-agent.yaml` at the same key.
 1. In DatadogHQ site go to "Integrations" -> Type "nginx" in the search bar -> Click on the "NGINX" Tile -> "Configuration" Tab -> "Install Integration" -- NGINX dashboards will now be available in the "Dashboards List"
 
-### Set up Kubernetes Engine Cluster Using Terraform
-1. Run: `gcloud services enable container.googleapis.com` - This allows for programmatic access to Kubernetes Engine, which will be used by scripts run at the commandline.
-1. Run: `./scripts/generate-tfvars.sh` - This uses values from your gcloud configuration and saves them to a configuration file that Terraform uses to deploy the demo to the configured project and zone.
-1. Run: `cd terraform` - This puts you in the directory with Terraform's configuration files.
-1. Run: `terraform init` - This prepares Terraform for action by downloading dependencies used to access GCP.
-1. Run: `terraform plan` - This is optional, but recommended as it displays a list of changes Terraform will make to your infrastructure.
-1. Run `terraform apply` - This runs the infrastructure automation to create your Kubernetes Engine cluster and prepare it for use.
-1. Type `yes` when prompted
-1. Allow the deploy to finish
-
-### Deploy Services
-
-1. Run: `cd ..` - This puts you back at your project root.
-1. Run: `kubectl create configmap nginx-config --from-file=manifests/configs/default.conf` - This loads the nginx configuration into Kubernetes as a [ConfigMap](https://cloud.google.com/kubernetes-engine/docs/concepts/configmap).
-1. Run: `kubectl create configmap datadog-config --from-file=manifests/configs/conf.yaml` - This loads the Datadog configuration into Kubernetes as a ConfigMap.
-1. Run: `kubectl apply -f manifests/` - This deploys the Datadog agent and nginx to your Kubernetes Engine cluster. It may take a minute or two and will complete in the background.
-
+### Set up Kubernetes Engine Cluster Using Terraform and Deploy Services
+```
+ make create
+```
 
 ## Validation
 
@@ -150,3 +140,4 @@ You can find additional information at the following locations
 * [Terraform Documentation](https://www.terraform.io/docs/providers/google/index.html)
 
 **This is not an officially supported Google product**
+
