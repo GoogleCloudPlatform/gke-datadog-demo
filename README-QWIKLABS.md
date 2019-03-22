@@ -7,7 +7,6 @@
 * [Initial Setup](#initial-setup)
    * [Configure gcloud](#configure-gcloud)
 * [Tools](#tools)
-   * [Install Terraform](#install-terraform)
    * [Install Apache Bench](#install-apache-bench)
 * [Configure Authentication](#configure-authentication)
 * [Deployment](#deployment)
@@ -46,16 +45,11 @@ gcloud init
 ```
 
 ### Tools
-1. [Terraform >= 0.11.7](https://www.terraform.io/downloads.html)
-2. Apache Bench
 
-The specific versions used may not be absolutely required but if you run into issues this may help.
+1. Apache Bench
 
+The specific versions used may not be absolutely required but if you run into issues this may help. Please note, Terraform has already been installed in Cloud console for you. 
 
-#### Install Terraform
-
-Terraform is used to automate the manipulation of cloud infrastructure. Its
-[installation instructions](https://www.terraform.io/intro/getting-started/install.html) are also available online.
 
 #### Install Apache Bench
 
