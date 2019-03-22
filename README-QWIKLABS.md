@@ -47,6 +47,7 @@ gcloud init
 ### Tools
 
 1. Apache Bench
+2. Terraform
 
 The specific versions used may not be absolutely required but if you run into issues this may help. Please note, Terraform has already been installed in Cloud console for you. 
 
