@@ -5,7 +5,7 @@
 * [Introduction](#introduction)
 * [Architecture](#architecture)
 * [Initial Setup](#initial-setup)
-   * [configure-gcloud](#configure-gcloud)
+   * [Configure gcloud](#configure-gcloud)
 * [Tools](#tools)
    * [Install Terraform](#install-terraform)
    * [Install Apache Bench](#install-apache-bench)
