@@ -59,8 +59,7 @@ for Ubuntu/Debian users, and the `httpd-tools` package for CentOS/Redhat users.
 
 #### Terraform
 
-Please note, Terraform has already been installed in cloud console for you. 
-
+Please note, Terraform has already been installed in cloud console for you.
 ## Deployment
 
 ### Set up Datadog
