@@ -4,14 +4,12 @@
 
 * [Introduction](#introduction)
 * [Architecture](#architecture)
-* [Prerequisites](#prerequisites)
-	* [Run Demo in a Google Cloud Shell](#run-demo-in-a-google-cloud-shell)
-	* [Run Demo in a SSH Terminal](#run-demo-in-a-ssh-terminal)
-	  * [Tools](#tools)
-	    * [Install Cloud SDK](#install-cloud-sdk)
-	    * [Install kubectl CLI](#install-kubectl-cli)
-	    * [Install Terraform](#install-terraform)
-	    * [Configure Authentication](#configure-authentication)
+* [Initial Setup](#initial-setup)
+   * [configure-gcloud](#configure-gcloud)
+* [Tools](#tools)
+   * [Install Terraform](#install-terraform)
+   * [Install Apache Bench](#install-apache-bench)
+* [Configure Authentication](#configure-authentication)
 * [Deployment](#deployment)
 * [Validation](#validation)
 * [Tear Down](#tear-down)
@@ -36,22 +34,39 @@ pipeline. Provision a service account with all permissions needed to run this wh
 There is a single Kubernetes Engine cluster with 2 nodes. The `datadog-agent.yaml` manifest creates a [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) that runs the Datadog agent on
 each node in the cluster. Alongside the Datadog agents are nginx processes that feed metrics to Datadog.
 
-## Prerequisites
+## Initial Setup
 
-### Run Demo in a Google Cloud Shell
+### Configure gcloud
 
-Click the button below to run the demo in a [Google Cloud Shell](https://cloud.google.com/shell/docs/).
-
-[![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https://github.com/GoogleCloudPlatform/gke-datadog-demo.git&amp;cloudshell_image=gcr.io/graphite-cloud-shell-images/terraform:latest&amp;cloudshell_tutorial=README.md)
-
-
-All the tools for the demo are installed. When using Cloud Shell execute the following
-command in order to setup gcloud cli. When executing this command please setup your region
+All the tools for the demo are installed. When using Cloud Shell execute the following command in order to setup gcloud cli. When executing this command please setup your region
 and zone.
 
 ```console
 gcloud init
 ```
+
+### Tools
+1. [Terraform >= 0.11.7](https://www.terraform.io/downloads.html)
+2. Apache Bench
+
+The specific versions used may not be absolutely required but if you run into issues this may help.
+
+
+#### Install Terraform
+
+Terraform is used to automate the manipulation of cloud infrastructure. Its
+[installation instructions](https://www.terraform.io/intro/getting-started/install.html) are also available online.
+
+#### Install Apache Bench
+
+For many users this won't be necessary as many operating systems have Apache
+Bench pre-installed. However it is contained within the `apache2-utils` package
+for Ubuntu/Debian users, and the `httpd-tools` package for CentOS/Redhat users.
+
+### Configure Authentication
+
+Use `gcloud auth login <your.account@example.com> --no-launch-browser` to get a link to log in your
+gcloud cli to your personal account.
 
 ## Deployment
 
