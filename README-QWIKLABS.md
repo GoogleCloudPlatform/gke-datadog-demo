@@ -8,7 +8,7 @@
    * [Configure gcloud](#configure-gcloud)
 * [Tools](#tools)
    * [Install Apache Bench](#install-apache-bench)
-* [Configure Authentication](#configure-authentication)
+   * [Terraform](#terraform)
 * [Deployment](#deployment)
 * [Validation](#validation)
 * [Tear Down](#tear-down)
@@ -49,7 +49,7 @@ gcloud init
 1. Apache Bench
 2. Terraform
 
-The specific versions used may not be absolutely required but if you run into issues this may help. Please note, Terraform has already been installed in Cloud console for you.
+The specific versions used may not be absolutely required but if you run into issues this may help.
 
 #### Install Apache Bench
 
@@ -57,10 +57,9 @@ For many users this won't be necessary as many operating systems have Apache
 Bench pre-installed. However it is contained within the `apache2-utils` package
 for Ubuntu/Debian users, and the `httpd-tools` package for CentOS/Redhat users.
 
-### Configure Authentication
+#### Terraform
 
-Use `gcloud auth login <your.account@example.com> --no-launch-browser` to get a link to log in your
-gcloud cli to your personal account.
+Please note, Terraform has already been installed in cloud console for you. 
 
 ## Deployment
 
