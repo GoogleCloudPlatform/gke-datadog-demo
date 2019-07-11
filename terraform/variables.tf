@@ -1,5 +1,5 @@
 /*
-Copyright 2018 Google LLC
+Copyright 2019 Google LLC
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -14,19 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-
 variable "project" {
   description = "the project for this network"
-  type        = "string"
+  type        = string
 }
 
 variable "zone" {
   description = "The zone where the GKE cluster should be deployed"
-  type        = "string"
+  type        = string
 }
 
 variable "clusterName" {
   default     = "gke-data-dog-cluster"
   description = "The name of the cluster to deploy the example datadog agents"
-  type        = "string"
+  type        = string
 }
